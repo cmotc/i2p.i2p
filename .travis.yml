@@ -31,15 +31,15 @@ matrix:
         - jdk_switcher use oraclejdk8
         - ./gradlew assemble
 
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.sonar/cache/
-    - .gradle
+#before_cache:
+  #- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  #- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+#cache:
+  #directories:
+    #- $HOME/.gradle/caches/
+    #- $HOME/.gradle/wrapper/
+    #- $HOME/.sonar/cache/
+    #- .gradle
 
 script:
   - |
