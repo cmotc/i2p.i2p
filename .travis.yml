@@ -12,7 +12,7 @@ matrix:
     - jdk: oraclejdk8
       addons:
         sonarcloud:
-          organization: "eyedeekay-githuv"
+          organization: "eyedeekay-github"
       before_install:
         - export JAVA7_HOME=$(jdk_switcher home openjdk7)
         - sed -i "1iplugins {\n    id 'org.sonarqube' version '2.7'\n}\n" build.gradle
