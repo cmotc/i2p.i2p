@@ -44,9 +44,9 @@ cache:
 script:
   - |
     if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then
-      ./gradlew sonarqube codeCoverageReport
+      ./gradlew --info sonarqube codeCoverageReport
     else
-      ./gradlew check codeCoverageReport
+      ./gradlew --info check codeCoverageReport
     fi
 
 after_success:
