@@ -44,12 +44,8 @@ cache:
 script:
   - |
     if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then
-      echo "travis jdk version was: $TRAVIS_JDK_VERSION"
-      cat build.gradle
       ./gradlew sonarqube codeCoverageReport
     else
-      echo "travis jdk version was: $TRAVIS_JDK_VERSION"
-      cat build.gradle
       ./gradlew check codeCoverageReport
     fi
 
