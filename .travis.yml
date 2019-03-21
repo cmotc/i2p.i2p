@@ -13,6 +13,8 @@ matrix:
       addons:
         sonarcloud:
           organization: "eyedeekay-github"
+          token:
+            secure: "An+WPXvQ1ppfo6VBt0meiQd11c3VY0aP7nH7cH+n3oOs0bAz8DxnNY+hhqwNkCg1lqvsCVAuy6+owlKpTzcAfV752ADnnXQuXm+vWk4H8xUlVTWiildtJYJILuDWPySrEuUOR8OzGrBqfoTn6zTtuTphgXTELkI0l2j3osBgP8qPxSFIc2Q+Xx1Jrcx+gdD+hJ0WWgI3zf4Q5DAai99E1eR1EC2BpuxmuSAAKQRPnIOZfUTPKUtJ4kWRqRHfRQyVCv6FGWTIt+txIjc2664T1Bqxs2i1IBZGd/+J/jkGn8eWO5qlxPNQ+FErWRmpf/Q7ME1ZT6+tYv731UpcD2Ams5Lr2LzF9jmJXP7RYYLYoOHtMckp3liolxSGVYq2Bs6jNY4FP55kMpXeawHGdMlY8w3igsjf9PaFF8M4GKCQ10eyvTCR9LBWiG4w6LsqLCiQXIMabpYAWwiBdQ27YwCL98mqze6Me1wPjkwV2AutW6sJcPc4GTU50BVlDcvhHGv35QFSe9VcrKBKmsvof3e7+sGojWDWdiBL7/VpvM5fn4/oxUggW8f5ScEENYuXVMKhcniko9cqZRrT5FMTUD2k6EMmSt0fb4uWZuLBPJJmw/+9NWJkFkWh07gV3YDJc2d6NwAhHfWxUmhJcWG3+crouXUzI1336XNTcBzuRgmt7Dg="
       before_install:
         - export JAVA7_HOME=$(jdk_switcher home openjdk7)
         - sed -i "1iplugins {\n    id 'org.sonarqube' version '2.7'\n}\n" build.gradle
