@@ -47,7 +47,7 @@ cache:
 script:
   - |
     if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then
-      ./gradlew --info sonarqube codeCoverageReport
+      ./gradlew --info sonarqube codeCoverageReport -Dsonar.login="$SONAR_TOKEN" -Dsonar.host.url="https://sonarcloud.io"
     else
       ./gradlew --info check codeCoverageReport
     fi
