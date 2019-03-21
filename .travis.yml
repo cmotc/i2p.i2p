@@ -14,7 +14,7 @@ matrix:
         sonarcloud:
           organization: "eyedeekay-github"
           token:
-            secure: "An+WPXvQ1ppfo6VBt0meiQd11c3VY0aP7nH7cH+n3oOs0bAz8DxnNY+hhqwNkCg1lqvsCVAuy6+owlKpTzcAfV752ADnnXQuXm+vWk4H8xUlVTWiildtJYJILuDWPySrEuUOR8OzGrBqfoTn6zTtuTphgXTELkI0l2j3osBgP8qPxSFIc2Q+Xx1Jrcx+gdD+hJ0WWgI3zf4Q5DAai99E1eR1EC2BpuxmuSAAKQRPnIOZfUTPKUtJ4kWRqRHfRQyVCv6FGWTIt+txIjc2664T1Bqxs2i1IBZGd/+J/jkGn8eWO5qlxPNQ+FErWRmpf/Q7ME1ZT6+tYv731UpcD2Ams5Lr2LzF9jmJXP7RYYLYoOHtMckp3liolxSGVYq2Bs6jNY4FP55kMpXeawHGdMlY8w3igsjf9PaFF8M4GKCQ10eyvTCR9LBWiG4w6LsqLCiQXIMabpYAWwiBdQ27YwCL98mqze6Me1wPjkwV2AutW6sJcPc4GTU50BVlDcvhHGv35QFSe9VcrKBKmsvof3e7+sGojWDWdiBL7/VpvM5fn4/oxUggW8f5ScEENYuXVMKhcniko9cqZRrT5FMTUD2k6EMmSt0fb4uWZuLBPJJmw/+9NWJkFkWh07gV3YDJc2d6NwAhHfWxUmhJcWG3+crouXUzI1336XNTcBzuRgmt7Dg="
+            secure: "XIPifUU821SeuFZ8BJtDQDnsfjIK//qLHFT+f7QvuEi+ivDnRL8S8uM4ZhgPUgtMP7xeRaUjDbaxnfRzRgYYUb8R5rtamPDUcHK7EYyfFtjxDios+etG231fHds7hQngbCgp8Qw+nAoIIVGr5OHcek9ba2PYE1u0sxRApSpZM/xH0l/WEfDa8WVrsA+ydfCRMIgpmrIe3DenwXYCAPrp41Ulj6L16qZOYyLAYG8yREIrUIv8AhdrBypvY9SBUB5BO0KhwOlnX0KbmhItO1VXmzgrTr9qVZk3vuPr0Iud82vnDkXyrVWghP+LZZMvy/trbpfBGiNtbK4BmIEMxxpPCACkxMCu60bigvYu2jiD3EoTiVtHc6RRX3DSETeuvL23HZSrMW7XI5h7nodkI7mLTPq57f3IBty/YYd/fS1ufmEj0+CZf31TnP/TUviOmfJLhz9XIxF6WRojqAAfDKewY3ppOK0sDeAFy4QxPhVFLmRgJtXH2yXp+ZrdKcmeQJSRYll5nyW9RgDQUQFNr3euL2N545Nj+IzwOW419OavKStOrgVEy0V+NCnNXBV0io9uoxq3PqJCiOD3wq5zi+8NjUmEqlhzTvuHMUL46b0p4Wc/Xj+/oNYNqkCTCf95kk0ux8MQrg8q6nlFXTCJ26XCu90L0XVG5clsdE/6Wb8InAo="
       before_install:
         - export JAVA7_HOME=$(jdk_switcher home openjdk7)
         - sed -i "1iplugins {\n    id 'org.sonarqube' version '2.7'\n}\n" build.gradle
