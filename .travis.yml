@@ -14,6 +14,8 @@ matrix:
         sonarcloud:
           organization: eyedeekay-github
           projectkey: eyedeekay_i2p.i2p
+          login:
+            secure: RmKvY6GVA4A6B6cIXhnmoqKEBQnA7tc6G6RUP0gNTjAMttgaZa1H2j/Oaw3fQVka7GDnxzJnseeK8EPaLS1dDY/Ok0cm1uSuBS+S0ZNKEt+LJf9KRvPp4irwqDBciK6s65tI7wzMHu88MTi0d46rpqwXuZ/erppp/IgjAQVpQ9mykgwpLWNXRSirkVCIF1RUqAJMBvKAlficwUVSYQuoljb8A0zQa2kjLXbsiKuu6uSS8VKAXhN/FTgKJAvlGKi4z5qrzQjafc3TnHqDfRLmoNgHkzSTOhyi+5OLfbaFCcE1dM3PyU+7Vw1sWwyvRsznGC0BH3vwTxB/WRRlZ7C5uLoRB+HdV8Pcfo1fXUJ5UKtUKo4fBNP1H1q3wIpkVb/CuGOzIb2rKozT1Ohc6WdotD41WcbOYuUAMJZVUliGqJOAp085RxB9FBxAWZoQJxaQPrPxPvx6IRoDdxubXBj8MAZixO7wDwuHeoWvvtrTdA8bnUU9RiaLvx0/+7dPTF4Lls6SI6OVyho1rdY2gcRUc41ndOuP9Huyiv4xzuKwch+oqDmv5tLC0N2xBzMZfCmUCRbastUG+Vw+8gBzZKF5x19N2kyuoQPC5k0+YJBQ9a1Jy8AC+sNcmYWclVVbukADIDNnlIFj1eourPQCrGLl4/g8G8QEVXM31d9S5MAGa7o=
           token:
             secure: RmKvY6GVA4A6B6cIXhnmoqKEBQnA7tc6G6RUP0gNTjAMttgaZa1H2j/Oaw3fQVka7GDnxzJnseeK8EPaLS1dDY/Ok0cm1uSuBS+S0ZNKEt+LJf9KRvPp4irwqDBciK6s65tI7wzMHu88MTi0d46rpqwXuZ/erppp/IgjAQVpQ9mykgwpLWNXRSirkVCIF1RUqAJMBvKAlficwUVSYQuoljb8A0zQa2kjLXbsiKuu6uSS8VKAXhN/FTgKJAvlGKi4z5qrzQjafc3TnHqDfRLmoNgHkzSTOhyi+5OLfbaFCcE1dM3PyU+7Vw1sWwyvRsznGC0BH3vwTxB/WRRlZ7C5uLoRB+HdV8Pcfo1fXUJ5UKtUKo4fBNP1H1q3wIpkVb/CuGOzIb2rKozT1Ohc6WdotD41WcbOYuUAMJZVUliGqJOAp085RxB9FBxAWZoQJxaQPrPxPvx6IRoDdxubXBj8MAZixO7wDwuHeoWvvtrTdA8bnUU9RiaLvx0/+7dPTF4Lls6SI6OVyho1rdY2gcRUc41ndOuP9Huyiv4xzuKwch+oqDmv5tLC0N2xBzMZfCmUCRbastUG+Vw+8gBzZKF5x19N2kyuoQPC5k0+YJBQ9a1Jy8AC+sNcmYWclVVbukADIDNnlIFj1eourPQCrGLl4/g8G8QEVXM31d9S5MAGa7o=
       before_install:
