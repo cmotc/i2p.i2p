@@ -46,9 +46,9 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.sonar/cache/
-    - .gradle
-    - core/logs
-    - apps/ministreaming/logs
+    #- .gradle
+    #- core/logs
+    #- apps/ministreaming/logs
 
 script:
   - |
