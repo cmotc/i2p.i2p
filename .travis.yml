@@ -41,10 +41,10 @@ before_cache:
   - echo "# NOTE: This I2P config file must use UTF-8 encoding" > core/logger.config
   - echo "logger.minimumOnScreenLevel=CRIT" >> core/logger.config
   - echo "logger.record.net.i2p.util.LogSettingsTest=ERROR" >> core/logger.config
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+#cache:
+  #directories:
+    #- $HOME/.gradle/caches/
+    #- $HOME/.gradle/wrapper/
     - $HOME/.sonar/cache/
     #- .gradle
     #- core/logs
