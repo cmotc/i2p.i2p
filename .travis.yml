@@ -54,7 +54,6 @@ script:
     else
       ./gradlew check codeCoverageReport
     fi
-    ant installer-linux
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
