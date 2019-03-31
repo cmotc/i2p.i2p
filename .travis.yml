@@ -48,10 +48,13 @@ cache:
 script:
   - |
     if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then
-      ./gradlew sonarqube codeCoverageReport
+      ./gradlew check codeCoverageReport
+      ## Sonarcloud temporarily disabled
+      #./gradlew sonarqube codeCoverageReport
     else
       ./gradlew check codeCoverageReport
     fi
+    ant installer-linux
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
