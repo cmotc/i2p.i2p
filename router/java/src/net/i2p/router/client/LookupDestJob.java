@@ -6,10 +6,15 @@ package net.i2p.router.client;
 
 import java.util.Locale;
 
+import net.i2p.crypto.Blinding;
 import net.i2p.data.Base32;
+import net.i2p.data.BlindData;
+import net.i2p.data.DatabaseEntry;
 import net.i2p.data.Destination;
+import net.i2p.data.EncryptedLeaseSet;
 import net.i2p.data.Hash;
 import net.i2p.data.LeaseSet;
+import net.i2p.data.SigningPublicKey;
 import net.i2p.data.i2cp.DestReplyMessage;
 import net.i2p.data.i2cp.HostReplyMessage;
 import net.i2p.data.i2cp.I2CPMessage;
@@ -17,12 +22,14 @@ import net.i2p.data.i2cp.I2CPMessageException;
 import net.i2p.data.i2cp.SessionId;
 import net.i2p.router.JobImpl;
 import net.i2p.router.RouterContext;
+import net.i2p.util.Log;
 
 /**
  * Look up the lease of a hash, to convert it to a Destination for the client.
  * Or, since 0.9.11, lookup a host name in the naming service.
  */
 class LookupDestJob extends JobImpl {
+    private final Log _log;
     private final ClientConnectionRunner _runner;
     private final long _reqID;
     private final long _timeout;
@@ -30,6 +37,7 @@ class LookupDestJob extends JobImpl {
     private final String _name;
     private final SessionId _sessID;
     private final Hash _fromLocalDest;
+    private final BlindData _blindData;
 
     private static final long DEFAULT_TIMEOUT = 15*1000;
 
@@ -52,29 +60,61 @@ class LookupDestJob extends JobImpl {
                          long reqID, long timeout, SessionId sessID, Hash h, String name,
                          Hash fromLocalDest) {
         super(context);
+        _log = context.logManager().getLog(LookupDestJob.class);
         if ((h == null && name == null) ||
             (h != null && name != null) ||
             (reqID >= 0 && sessID == null) ||
-            (reqID < 0 && name != null))
+            (reqID < 0 && name != null)) {
+            _log.warn("bad args");
             throw new IllegalArgumentException();
+        }
         _runner = runner;
         _reqID = reqID;
         _timeout = timeout;
         _sessID = sessID;
         _fromLocalDest = fromLocalDest;
-        if (name != null && name.length() == 60) {
+        BlindData bd = null;
+        if (name != null && name.length() >= 60) {
             // convert a b32 lookup to a hash lookup
             String nlc = name.toLowerCase(Locale.US);
             if (nlc.endsWith(".b32.i2p")) {
-                byte[] b = Base32.decode(nlc.substring(0, 52));
-                if (b != null && b.length == Hash.HASH_LENGTH) {
-                    h = Hash.create(b);
-                    name = null;
+                byte[] b = Base32.decode(nlc.substring(0, nlc.length() - 8));
+                if (b != null) {
+                    if (b.length == Hash.HASH_LENGTH) {
+                        h = Hash.create(b);
+                        if (_log.shouldDebug())
+                            _log.debug("Converting name lookup " + name + " to " + h);
+                        name = null;
+                    } else if (b.length >= 35) {
+                        // encrypted LS2
+                        // lookup the blinded hash
+                        try {
+                            bd = Blinding.decode(context, b);
+                            SigningPublicKey spk = bd.getUnblindedPubKey();
+                            BlindData bd2 = getContext().netDb().getBlindData(spk);
+                            if (bd2 != null) {
+                                bd = bd2;
+                            } else {
+                                getContext().netDb().setBlindData(bd);
+                            }
+                            h = bd.getBlindedHash();
+                            if (_log.shouldDebug())
+                                _log.debug("Converting name lookup " + name + " to blinded " + h);
+                            name = null;
+                        } catch (RuntimeException re) {
+                            if (_log.shouldWarn())
+                                _log.debug("Failed blinding conversion of " + name, re);
+                            // Do NOT lookup as a name, naming service will call us again and infinite loop
+                            name = null;
+                            // h and name both null, runJob will fail immediately
+                        }
+                    }
                 }
             }
         }
         _hash = h;
         _name = name;
+        _blindData = bd;
     }
     
     public String getName() { return _name != null ?
@@ -83,16 +123,34 @@ class LookupDestJob extends JobImpl {
     }
 
     public void runJob() {
+        if (_blindData != null) {
+            Destination d = _blindData.getDestination();
+            if (d != null) {
+                if (_log.shouldDebug())
+                    _log.debug("Found cached b33 lookup " + _name + " to " + d);
+                returnDest(d);
+                return;
+            }
+        }
         if (_name != null) {
             // inline, ignore timeout
             Destination d = getContext().namingService().lookup(_name);
-            if (d != null)
+            if (d != null) {
+                if (_log.shouldDebug())
+                    _log.debug("Found name lookup " + _name + " to " + d);
                 returnDest(d);
-            else
+            } else {
+                if (_log.shouldDebug())
+                    _log.debug("Failed name lookup " + _name);
                 returnFail();
-        } else {
+            }
+        } else if (_hash != null) {
             DoneJob done = new DoneJob(getContext());
+            // TODO tell router this is an encrypted lookup, skip 38 or earlier ffs?
             getContext().netDb().lookupDestination(_hash, done, _timeout, _fromLocalDest);
+        } else {
+            // blinding decode fail
+            returnFail();
         }
     }
 
@@ -103,10 +161,27 @@ class LookupDestJob extends JobImpl {
         public String getName() { return "LeaseSet Lookup Reply to Client"; }
         public void runJob() {
             Destination dest = getContext().netDb().lookupDestinationLocally(_hash);
-            if (dest != null)
+            if (dest == null && _blindData != null) {
+                // TODO store and lookup original hash instead
+                LeaseSet ls = getContext().netDb().lookupLeaseSetLocally(_hash);
+                if (ls != null && ls.getType() == DatabaseEntry.KEY_TYPE_ENCRYPTED_LS2) {
+                    // already decrypted
+                    EncryptedLeaseSet encls = (EncryptedLeaseSet) ls;
+                    LeaseSet decls = encls.getDecryptedLeaseSet();
+                    if (decls != null) {
+                        dest = decls.getDestination();
+                    }
+                }
+            }
+            if (dest != null) {
+                if (_log.shouldDebug())
+                    _log.debug("Found hash lookup " + _hash + " to " + dest);
                 returnDest(dest);
-            else
+            } else {
+                if (_log.shouldDebug())
+                    _log.debug("Failed hash lookup " + _hash);
                 returnFail();
+            }
         }
     }
 
@@ -129,8 +204,10 @@ class LookupDestJob extends JobImpl {
         I2CPMessage msg;
         if (_reqID >= 0)
             msg = new HostReplyMessage(_sessID, HostReplyMessage.RESULT_FAILURE, _reqID);
-        else
+        else if (_hash != null)
             msg = new DestReplyMessage(_hash);
+        else
+            return; // shouldn't happen
         try {
             _runner.doSend(msg);
         } catch (I2CPMessageException ime) {}
