@@ -623,6 +623,12 @@ public class GeneralHelper {
         return getProperty(tunnel, "i2cp.accessList", "").replace(",", "\n");
     }
 
+    public String getFilterDefinition(int tunnel) {
+        TunnelController tunnelController = getController(tunnel);
+        String filter = tunnelController.getFilter();
+        return filter == null ? "" : filter;
+    }
+
     public String getJumpList(int tunnel) {
         return getProperty(tunnel, I2PTunnelHTTPClient.PROP_JUMP_SERVERS,
                            I2PTunnelHTTPClient.DEFAULT_JUMP_SERVERS).replace(",", "\n");

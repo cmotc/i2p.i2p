@@ -75,6 +75,7 @@ public class TunnelConfig {
     private String _newProxyUser;
     private String _newProxyPW;
     private Destination _dest;
+    private String _filterDefinition;
 
     public TunnelConfig() {
         _context = I2PAppContext.getGlobalContext();
@@ -326,6 +327,14 @@ public class TunnelConfig {
         default:
             _booleanOptions.remove(PROP_ENABLE_ACCESS_LIST);
             _booleanOptions.remove(PROP_ENABLE_BLACKLIST);
+        }
+    }
+
+    public void setFilterDefinition(String filterDefinition) {
+        if (filterDefinition != null) {
+            filterDefinition = filterDefinition.trim();
+            if (!filterDefinition.isEmpty())
+                _filterDefinition = filterDefinition;
         }
     }
 
@@ -613,6 +622,10 @@ public class TunnelConfig {
             // generic server stuff
             if (_targetPort >= 0)
                 config.setProperty(TunnelController.PROP_TARGET_PORT, Integer.toString(_targetPort));
+
+            if (_filterDefinition != null)
+                config.setProperty(TunnelController.PROP_FILTER, _filterDefinition);
+            
             // see TunnelController.setConfig()
             _booleanOptions.add(TunnelController.PROP_LIMITS_SET);
             for (String p : _booleanServerOpts)
