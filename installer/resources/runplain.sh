@@ -11,8 +11,8 @@
 # Note that (percent)INSTALL_PATH and (percent)SYSTEM_java_io_tmpdir
 # should have been replaced by the izpack installer.
 # If you did not run the installer, replace them with the appropriate path.
-I2P="%INSTALL_PATH"
-I2PTEMP="%SYSTEM_java_io_tmpdir"
+I2P="/usr/share/i2p"
+I2PTEMP="/tmp"
 
 # Having IPv6 enabled can cause problems with certain configurations. Changing the
 # next value to true may help.

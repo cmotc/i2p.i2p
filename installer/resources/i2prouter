@@ -10,7 +10,7 @@
 # wrapper configuration file.
 #
 # If this script fails to successfully invoke i2psvc on your platform,
-# try the runplain.sh script instead.
+# try the i2prouter-nowrapper script instead.
 #
 # This software is the proprietary information of Tanuki Software.
 # You shall use it only in accordance with the terms of the
@@ -24,21 +24,12 @@
 # These settings can be modified to fit the needs of your application
 # Optimized for use with version 3.5.22 of the Wrapper.
 
-# Paths
-# Note that (percent)INSTALL_PATH, (percent)USER_HOME,  and (percent)SYSTEM_java_io_tmpdir
-# should have been replaced by the izpack installer.
-# If you did not run the installer, replace them with the appropriate paths.
-I2P="%INSTALL_PATH"
-if [ "`uname -s`" = "Darwin" ]; then
-   if [ -d "%USER_HOME/Library/Application Support" ]; then
-       I2P_CONFIG_DIR="%USER_HOME/Library/Application Support/i2p"
-   else
-       I2P_CONFIG_DIR="%USER_HOME/.i2p"
-   fi
-else
-    I2P_CONFIG_DIR="%USER_HOME/.i2p"
-fi
-I2PTEMP="%SYSTEM_java_io_tmpdir"
+# Read config file if found
+[ -f /etc/default/i2p ] && . /etc/default/i2p
+
+I2P="/usr/share/i2p"
+I2P_CONFIG_DIR="$HOME/.i2p"
+I2PTEMP="/tmp"
 # PORTABLE installation:
 # Use the following instead.
 #I2PTEMP="%INSTALL_PATH"
@@ -69,8 +60,8 @@ fi
 #RUN_AS_USER=
 
 # Wrapper
-WRAPPER_CMD="$I2P/i2psvc"
-WRAPPER_CONF="$I2P/wrapper.config"
+WRAPPER_CMD="/usr/sbin/wrapper"
+WRAPPER_CONF="/etc/i2p/wrapper.config"
 
 # Priority at which to run the wrapper.  See "man nice" for valid priorities.
 #  nice is only used if a priority is specified.
@@ -180,76 +171,7 @@ if [ ! -e "$WRAPPER_CONF" ]; then
        exit 1
 fi
 
-# Workaround for Gentoo
 JAVABINARY=$(awk -F'=' '/^ *wrapper\.java\.command/{print $2}' "$WRAPPER_CONF")
-
-if [ -e /etc/gentoo-release ]; then
-    if [ $JAVABINARY = java ]; then
-        if [ -x /etc/java-config-2/current-system-vm/bin/java ]; then
-            JAVABINARY="/etc/java-config-2/current-system-vm/bin/java"
-        else
-            echo "Please set wrapper.java.command in $WRAPPER_CONF"
-            exit 1
-        fi
-    fi
-fi
-
-WRAPPER_URL="https://geti2p.net/en/misc/manual-wrapper"
-unsupported() {
-    echo "The most likely reason is that a supported version of the java"
-    echo "wrapper is not available in the I2P installation package for your"
-    echo "platform. It may be possible to manually download and install"
-    echo "a compatible wrapper for your system."
-    echo "See ${WRAPPER_URL} for hints."
-    echo
-    echo "In the meantime, you may start I2P by running the script"
-    echo "${I2P}/runplain.sh"
-    echo
-}
-
-freebsd10() {
-    echo
-    echo "The current version of the Tanuki wrapper that is bundled"
-    echo "with I2P does not support FreeBSD 10."
-    echo
-    echo "See http://trac.i2p2.de/ticket/1118#comment:13 for a work-around."
-    echo "After applying the work-around, as a normal user or a dedicated"
-    echo "i2p user, you can then run:"
-    echo "$ ./i2prouter start"
-    echo
-    echo "Or, you may also start I2P by running the script:"
-    echo "${I2P}/runplain.sh"
-    echo
-}
-
-failed() {
-    echo "**`gettext 'Failed to load the wrapper'`**"
-    case `uname -s` in
-        FreeBSD)
-            case `uname -r` in
-                10*|11*)
-                    freebsd10
-                    ;;
-                *)
-                    # We should never get here on recent versions of FreeBSD
-                    if ! $(pkg info -E 'libiconv*' > /dev/null 2>&1); then
-                        echo
-                        echo "The wrapper requires libiconv."
-                        echo
-                        echo "It can be installed with pkg install libiconv"
-                        echo
-                    fi
-                    ;;
-            esac
-            ;;
-
-        *)
-            echo
-            unsupported
-            ;;
-    esac
-    exit 1
-}
 
 if [ -n "$FIXED_COMMAND" ]
 then
@@ -1078,7 +1000,6 @@ startwait() {
         if [ "X$pid" = "X" ]
         then
             eval echo " `gettext 'WARNING: $APP_LONG_NAME may have failed to start.'`"
-            failed
         else
             eval echo ' running: PID:$pid'
         fi
@@ -1881,7 +1802,7 @@ showUsage() {
 }
 
 showsetusermesg()  {
-    echo "`gettext 'Please edit i2prouter and set the variable RUN_AS_USER'`."
+    echo "`gettext 'Please edit /etc/default/i2p and set the variable RUN_AS_USER'`."
 }
 
 checkifstartingasroot() {
@@ -1889,7 +1810,7 @@ checkifstartingasroot() {
         echo "`gettext 'Running I2P as the root user is *not* recommended.'`"
         showsetusermesg
         echo
-        echo "`gettext 'To run as root anyway, edit i2prouter and set ALLOW_ROOT=true.'`"
+        echo "`gettext 'To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true.'`"
         exit 1
     fi
 }
@@ -1981,24 +1902,10 @@ docommand() {
             status
             ;;
 
-        'install')
-            installdaemon
-            if [ ! `grep ^RUN_AS_USER $0` ]; then
-                 echo
-                 showsetusermesg
-            fi
-            echo
-            echo "You may want to disable the browser from launching at startup at"
-            echo "http://127.0.0.1:7657/configclients"
-            echo
-            echo "I2P_CONFIG_DIR is currently set to $I2P_CONFIG_DIR."
-            echo "Change the value in $0 if this is not"
-            echo "appropriate for your configuration."
-            ;;
-
-        'remove' | 'uninstall')
-            removedaemon
-            ;;
+        'install' | 'remove' | 'uninstall')
+            echo "Use \"dpkg-reconfigure i2p\" to configure the initscript."
+            exit 1
+	    ;;
 
         'dump')
             checkUser "" "$COMMAND"

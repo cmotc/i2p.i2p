@@ -186,13 +186,13 @@ msgid "Request a Java thread dump if running."
 msgstr "Çalışıyorsa Java iş parçacığı dökümü isteyin."
 
 #: ../i2prouter:1874
-msgid "Please edit i2prouter and set the variable RUN_AS_USER"
-msgstr "i2prouter dosyasını düzenleyin ve RUN_AS_USER değişkenini ayarlayın"
+msgid "Please edit /etc/default/i2p and set the variable RUN_AS_USER"
+msgstr "/etc/default/i2p dosyasını düzenleyin ve RUN_AS_USER değişkenini ayarlayın"
 
 #: ../i2prouter:1879
 msgid "Running I2P as the root user is *not* recommended."
 msgstr "I2P yazılımının root olarak çalıştırmanız *önerilmez*."
 
 #: ../i2prouter:1882
-msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
-msgstr "Root olarak çalıştırmak için i2prouter dosyasını düzenleyin ve ALLOW_ROOT=true ayarını yapın."
+msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
+msgstr "Root olarak çalıştırmak için /etc/default/i2p dosyasını düzenleyin ve ALLOW_ROOT=true ayarını yapın."

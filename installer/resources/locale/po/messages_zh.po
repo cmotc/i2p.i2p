@@ -186,13 +186,13 @@ msgid "Request a Java thread dump if running."
 msgstr "请求Java转储(如果在运行)。"
 
 #: ../i2prouter:1874
-msgid "Please edit i2prouter and set the variable RUN_AS_USER"
-msgstr "请编辑 i2prouter 设置 RUN_AS_USER 变量"
+msgid "Please edit /etc/default/i2p and set the variable RUN_AS_USER"
+msgstr "请编辑 /etc/default/i2p 设置 RUN_AS_USER 变量"
 
 #: ../i2prouter:1879
 msgid "Running I2P as the root user is *not* recommended."
 msgstr "推荐 *不要* 以 root 身份运行 I2P 。"
 
 #: ../i2prouter:1882
-msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
-msgstr "要以root运行，请编辑 i2prouter 并设置 ALLOW_ROOT=true。"
+msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
+msgstr "要以root运行，请编辑 /etc/default/i2p 并设置 ALLOW_ROOT=true。"

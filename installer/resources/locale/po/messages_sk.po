@@ -187,13 +187,13 @@ msgid "Request a Java thread dump if running."
 msgstr "Vyžiadať zrušenie vlákna Javy, ak je spustený."
 
 #: ../i2prouter:1874
-msgid "Please edit i2prouter and set the variable RUN_AS_USER"
-msgstr "Prosím upravte i2prouter a nastavte premennú RUN_AS_USER"
+msgid "Please edit /etc/default/i2p and set the variable RUN_AS_USER"
+msgstr "Prosím upravte /etc/default/i2p a nastavte premennú RUN_AS_USER"
 
 #: ../i2prouter:1879
 msgid "Running I2P as the root user is *not* recommended."
 msgstr "Spúšťať I2P ako root *nie* je odporúčané."
 
 #: ../i2prouter:1882
-msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
-msgstr "Ak ho chcete spustiť ako root aj tak, upravte i2prouter a nastavte ALLOW_ROOT=true."
+msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
+msgstr "Ak ho chcete spustiť ako root aj tak, upravte /etc/default/i2p a nastavte ALLOW_ROOT=true."

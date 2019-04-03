@@ -186,13 +186,13 @@ msgid "Request a Java thread dump if running."
 msgstr "起動中の場合、 Java スレッドダンプを要求"
 
 #: ../i2prouter:1874
-msgid "Please edit i2prouter and set the variable RUN_AS_USER"
-msgstr "i2prouter を編集して、変数 RUN_AS_USER を設定してください"
+msgid "Please edit /etc/default/i2p and set the variable RUN_AS_USER"
+msgstr "/etc/default/i2p を編集して、変数 RUN_AS_USER を設定してください"
 
 #: ../i2prouter:1879
 msgid "Running I2P as the root user is *not* recommended."
 msgstr "root ユーザーとしての I2P の起動は推奨され*ません*。"
 
 #: ../i2prouter:1882
-msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
-msgstr "とにかく root として起動し、 i2prouter を編集して、ALLOW_ROOT=true と設定する。"
+msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
+msgstr "とにかく root として起動し、 /etc/default/i2p を編集して、ALLOW_ROOT=true と設定する。"

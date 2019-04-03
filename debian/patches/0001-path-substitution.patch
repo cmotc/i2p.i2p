@@ -14,20 +14,20 @@ Debian wrapper.config to try to prevent confusion.
  installer/resources/wrapper.config |   70 ++++++------------------------
  4 files changed, 24 insertions(+), 134 deletions(-)
 
-Index: b/installer/resources/eepget
+Index: i2p.i2p.fresh/installer/resources/eepget
 ===================================================================
---- a/installer/resources/eepget
-+++ b/installer/resources/eepget
+--- i2p.i2p.fresh.orig/installer/resources/eepget
++++ i2p.i2p.fresh/installer/resources/eepget
 @@ -1,3 +1,3 @@
  #!/bin/sh
 -I2P="%INSTALL_PATH"
 -java -cp "$I2P/lib/i2p.jar" net.i2p.util.EepGet "$@"
 +I2P="/usr/share/i2p"
 +java -cp "$I2P/lib/i2p.jar:/usr/share/java/gnu-getopt.jar" net.i2p.util.EepGet "$@"
-Index: b/installer/resources/i2prouter
+Index: i2p.i2p.fresh/installer/resources/i2prouter
 ===================================================================
---- a/installer/resources/i2prouter
-+++ b/installer/resources/i2prouter
+--- i2p.i2p.fresh.orig/installer/resources/i2prouter
++++ i2p.i2p.fresh/installer/resources/i2prouter
 @@ -10,7 +10,7 @@
  # wrapper configuration file.
  #
@@ -209,10 +209,10 @@ Index: b/installer/resources/i2prouter
  
          'dump')
              checkUser "" "$COMMAND"
-Index: b/installer/resources/runplain.sh
+Index: i2p.i2p.fresh/installer/resources/runplain.sh
 ===================================================================
---- a/installer/resources/runplain.sh
-+++ b/installer/resources/runplain.sh
+--- i2p.i2p.fresh.orig/installer/resources/runplain.sh
++++ i2p.i2p.fresh/installer/resources/runplain.sh
 @@ -11,8 +11,8 @@
  # Note that (percent)INSTALL_PATH and (percent)SYSTEM_java_io_tmpdir
  # should have been replaced by the izpack installer.
@@ -224,10 +224,10 @@ Index: b/installer/resources/runplain.sh
  
  # Having IPv6 enabled can cause problems with certain configurations. Changing the
  # next value to true may help.
-Index: b/installer/resources/wrapper.config
+Index: i2p.i2p.fresh/installer/resources/wrapper.config
 ===================================================================
---- a/installer/resources/wrapper.config
-+++ b/installer/resources/wrapper.config
+--- i2p.i2p.fresh.orig/installer/resources/wrapper.config
++++ i2p.i2p.fresh/installer/resources/wrapper.config
 @@ -8,22 +8,13 @@
  # click "Shutdown", wait 11 minutes, then start i2p.
  #
@@ -353,10 +353,10 @@ Index: b/installer/resources/wrapper.config
  # http://wrapper.tanukisoftware.com/doc/english/prop-check-deadlock.html
  # requires wrapper 3.5.0 or higher
  # interval is seconds
-Index: b/installer/resources/locale/po/messages_de.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_de.po
 ===================================================================
---- a/installer/resources/locale/po/messages_de.po
-+++ b/installer/resources/locale/po/messages_de.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_de.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_de.po
 @@ -190,13 +190,13 @@ msgid "Request a Java thread dump if run
  msgstr "Falls gestartet, fordere einen Java Thread dump an"
  
@@ -375,10 +375,10 @@ Index: b/installer/resources/locale/po/messages_de.po
 -msgstr "Um I2P trotzdem als root auszuführen bearbeite i2prouter und setze ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Um I2P trotzdem als root auszuführen bearbeite /etc/default/i2p und setze ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_en.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_en.po
 ===================================================================
---- a/installer/resources/locale/po/messages_en.po
-+++ b/installer/resources/locale/po/messages_en.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_en.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_en.po
 @@ -185,7 +185,7 @@ msgid "Request a Java thread dump if run
  msgstr ""
  
@@ -395,10 +395,10 @@ Index: b/installer/resources/locale/po/messages_en.po
 -msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
  msgstr ""
-Index: b/installer/resources/locale/po/messages_it.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_it.po
 ===================================================================
---- a/installer/resources/locale/po/messages_it.po
-+++ b/installer/resources/locale/po/messages_it.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_it.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_it.po
 @@ -189,13 +189,13 @@ msgid "Request a Java thread dump if run
  msgstr "Richiedi un Java thread dump se è in esecuzione."
  
@@ -417,10 +417,10 @@ Index: b/installer/resources/locale/po/messages_it.po
 -msgstr "Per eseguirlo comunque come amministratore, modifica  i2prouter e imposta ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Per eseguirlo comunque come amministratore, modifica  /etc/default/i2p e imposta ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_zh.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_zh.po
 ===================================================================
---- a/installer/resources/locale/po/messages_zh.po
-+++ b/installer/resources/locale/po/messages_zh.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_zh.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_zh.po
 @@ -186,13 +186,13 @@ msgid "Request a Java thread dump if run
  msgstr "请求Java转储(如果在运行)。"
  
@@ -439,10 +439,10 @@ Index: b/installer/resources/locale/po/messages_zh.po
 -msgstr "要以root运行，请编辑 i2prouter 并设置 ALLOW_ROOT=true。"
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "要以root运行，请编辑 /etc/default/i2p 并设置 ALLOW_ROOT=true。"
-Index: b/installer/resources/locale/po/messages_tr.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_tr.po
 ===================================================================
---- a/installer/resources/locale/po/messages_tr.po
-+++ b/installer/resources/locale/po/messages_tr.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_tr.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_tr.po
 @@ -186,13 +186,13 @@ msgid "Request a Java thread dump if run
  msgstr "Çalışıyorsa Java iş parçacığı dökümü isteyin."
  
@@ -461,10 +461,10 @@ Index: b/installer/resources/locale/po/messages_tr.po
 -msgstr "Root olarak çalıştırmak için i2prouter dosyasını düzenleyin ve ALLOW_ROOT=true ayarını yapın."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Root olarak çalıştırmak için /etc/default/i2p dosyasını düzenleyin ve ALLOW_ROOT=true ayarını yapın."
-Index: b/installer/resources/locale/po/messages_es.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_es.po
 ===================================================================
---- a/installer/resources/locale/po/messages_es.po
-+++ b/installer/resources/locale/po/messages_es.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_es.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_es.po
 @@ -190,13 +190,13 @@ msgid "Request a Java thread dump if run
  msgstr "Solicitar un volcado del hilo JAVA si se está ejecutando."
  
@@ -483,10 +483,10 @@ Index: b/installer/resources/locale/po/messages_es.po
 -msgstr "Para ejecutar como root de todos modos, edite i2prouter y ponga la variable ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Para ejecutar como root de todos modos, edite /etc/default/i2p y ponga la variable ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_pt.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_pt.po
 ===================================================================
---- a/installer/resources/locale/po/messages_pt.po
-+++ b/installer/resources/locale/po/messages_pt.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_pt.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_pt.po
 @@ -190,13 +190,13 @@ msgid "Request a Java thread dump if run
  msgstr "Requisitar o histórico Java se iniciado."
  
@@ -505,10 +505,10 @@ Index: b/installer/resources/locale/po/messages_pt.po
 -msgstr "Para continuar a executar como \"root\", edite i2prouter e defina ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Para continuar a executar como \"root\", edite /etc/default/i2p e defina ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_fr.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_fr.po
 ===================================================================
---- a/installer/resources/locale/po/messages_fr.po
-+++ b/installer/resources/locale/po/messages_fr.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_fr.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_fr.po
 @@ -188,13 +188,13 @@ msgid "Request a Java thread dump if run
  msgstr "Demander un vidage des fils d’exécution de Java si elle est en cours d’exécution."
  
@@ -527,10 +527,10 @@ Index: b/installer/resources/locale/po/messages_fr.po
 -msgstr "Pour quand même exécuter en tant que root, modifier i2prouter et définir ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Pour quand même exécuter en tant que root, modifier /etc/default/i2p et définir ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_ru.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_ru.po
 ===================================================================
---- a/installer/resources/locale/po/messages_ru.po
-+++ b/installer/resources/locale/po/messages_ru.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_ru.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_ru.po
 @@ -192,13 +192,13 @@ msgid "Request a Java thread dump if run
  msgstr "Запросить дамп нитей Java, если запущено."
  
@@ -549,10 +549,10 @@ Index: b/installer/resources/locale/po/messages_ru.po
 -msgstr "Чтобы всё равно запустить под root'ом, отредактируйте i2prouter и установите ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Чтобы всё равно запустить под root'ом, отредактируйте /etc/default/i2p и установите ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_sv.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_sv.po
 ===================================================================
---- a/installer/resources/locale/po/messages_sv.po
-+++ b/installer/resources/locale/po/messages_sv.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_sv.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_sv.po
 @@ -187,13 +187,13 @@ msgid "Request a Java thread dump if run
  msgstr "Fråga efter en Java thread dump vid drift."
  
@@ -571,10 +571,10 @@ Index: b/installer/resources/locale/po/messages_sv.po
 -msgstr "För att köra som root oavsett, ändra i2prouter och sätt ALLOW_ROOT=true"
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "För att köra som root oavsett, ändra /etc/default/i2p och sätt ALLOW_ROOT=true"
-Index: b/installer/resources/locale/po/messages_ro.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_ro.po
 ===================================================================
---- a/installer/resources/locale/po/messages_ro.po
-+++ b/installer/resources/locale/po/messages_ro.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_ro.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_ro.po
 @@ -186,13 +186,13 @@ msgid "Request a Java thread dump if run
  msgstr "Solicită Java thread dump dacă rulează."
  
@@ -593,10 +593,10 @@ Index: b/installer/resources/locale/po/messages_ro.po
 -msgstr "Pentru a rula ca root, oricum, editați i2prouter și setați ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Pentru a rula ca root, oricum, editați /etc/default/i2p și setați ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_pt_BR.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_pt_BR.po
 ===================================================================
---- a/installer/resources/locale/po/messages_pt_BR.po
-+++ b/installer/resources/locale/po/messages_pt_BR.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_pt_BR.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_pt_BR.po
 @@ -189,13 +189,13 @@ msgid "Request a Java thread dump if run
  msgstr "Solicitar um despejo de thread se está sendo executado."
  
@@ -615,10 +615,10 @@ Index: b/installer/resources/locale/po/messages_pt_BR.po
 -msgstr "De qualquer forma, se quiser mesmo executar o roteador como root, edite i2prouter e ponha ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "De qualquer forma, se quiser mesmo executar o roteador como root, edite /etc/default/i2p e ponha ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_pl.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_pl.po
 ===================================================================
---- a/installer/resources/locale/po/messages_pl.po
-+++ b/installer/resources/locale/po/messages_pl.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_pl.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_pl.po
 @@ -186,13 +186,13 @@ msgid "Request a Java thread dump if run
  msgstr "Zażądaj zrzutu wątków Java jeśli jest uruchomiona."
  
@@ -637,10 +637,10 @@ Index: b/installer/resources/locale/po/messages_pl.po
 -msgstr "Aby uruchomić jako root, edytuj i2prouter i ustaw ALLOW_ROOT=true."
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "Aby uruchomić jako root, edytuj /etc/default/i2p i ustaw ALLOW_ROOT=true."
-Index: b/installer/resources/locale/po/messages_ja.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_ja.po
 ===================================================================
---- a/installer/resources/locale/po/messages_ja.po
-+++ b/installer/resources/locale/po/messages_ja.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_ja.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_ja.po
 @@ -186,13 +186,13 @@ msgid "Request a Java thread dump if run
  msgstr "起動中の場合、 Java スレッドダンプを要求"
  
@@ -659,10 +659,10 @@ Index: b/installer/resources/locale/po/messages_ja.po
 -msgstr "とにかく root として起動し、 i2prouter を編集して、ALLOW_ROOT=true と設定する。"
 +msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
 +msgstr "とにかく root として起動し、 /etc/default/i2p を編集して、ALLOW_ROOT=true と設定する。"
-Index: b/installer/resources/locale/po/messages_sk.po
+Index: i2p.i2p.fresh/installer/resources/locale/po/messages_sk.po
 ===================================================================
---- a/installer/resources/locale/po/messages_sk.po
-+++ b/installer/resources/locale/po/messages_sk.po
+--- i2p.i2p.fresh.orig/installer/resources/locale/po/messages_sk.po
++++ i2p.i2p.fresh/installer/resources/locale/po/messages_sk.po
 @@ -187,13 +187,13 @@ msgid "Request a Java thread dump if run
  msgstr "Vyžiadať zrušenie vlákna Javy, ak je spustený."
  

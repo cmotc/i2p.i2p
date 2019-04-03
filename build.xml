@@ -2442,7 +2442,7 @@
     <target name="debian-binary" depends="getExtendedVersion">
         <exec executable="fakeroot" failonerror="true">
             <arg value="debian/rules" />
-            <arg value="patch" />
+            <arg value="build" />
             <arg value="binary" />
             <arg value="clean" />
         </exec>

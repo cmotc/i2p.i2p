@@ -187,13 +187,13 @@ msgid "Request a Java thread dump if running."
 msgstr "Fråga efter en Java thread dump vid drift."
 
 #: ../i2prouter:1874
-msgid "Please edit i2prouter and set the variable RUN_AS_USER"
-msgstr "Var god ändra i2prouter och set variabeln RUN_AS_USER"
+msgid "Please edit /etc/default/i2p and set the variable RUN_AS_USER"
+msgstr "Var god ändra /etc/default/i2p och set variabeln RUN_AS_USER"
 
 #: ../i2prouter:1879
 msgid "Running I2P as the root user is *not* recommended."
 msgstr "Att köra I2P som användare root är *inte* rekommenderat."
 
 #: ../i2prouter:1882
-msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
-msgstr "För att köra som root oavsett, ändra i2prouter och sätt ALLOW_ROOT=true"
+msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
+msgstr "För att köra som root oavsett, ändra /etc/default/i2p och sätt ALLOW_ROOT=true"

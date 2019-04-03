@@ -188,13 +188,13 @@ msgid "Request a Java thread dump if running."
 msgstr "Demander un vidage des fils d’exécution de Java si elle est en cours d’exécution."
 
 #: ../i2prouter:1874
-msgid "Please edit i2prouter and set the variable RUN_AS_USER"
-msgstr "Veuillez modifier i2prouter et définir la variable RUN_AS_USER"
+msgid "Please edit /etc/default/i2p and set the variable RUN_AS_USER"
+msgstr "Veuillez modifier /etc/default/i2p et définir la variable RUN_AS_USER"
 
 #: ../i2prouter:1879
 msgid "Running I2P as the root user is *not* recommended."
 msgstr "Il n’est *pas* recommandé d’exécuter I2P en tant que root."
 
 #: ../i2prouter:1882
-msgid "To run as root anyway, edit i2prouter and set ALLOW_ROOT=true."
-msgstr "Pour quand même exécuter en tant que root, modifier i2prouter et définir ALLOW_ROOT=true."
+msgid "To run as root anyway, edit /etc/default/i2p and set ALLOW_ROOT=true."
+msgstr "Pour quand même exécuter en tant que root, modifier /etc/default/i2p et définir ALLOW_ROOT=true."
