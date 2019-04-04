@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 i2p (0.9.39-2-1) UNRELEASED; urgency=medium
+=======
+i2p (0.9.39-0-1) UNRELEASED; urgency=medium
+
+  [ idk ]
+  * Unofficial Debian package built using "ant debian"
+  * Unofficial Debian package built using "ant debian"
+
+  [ dev ]
+  * Unofficial Debian package built using "ant debian"
+
+ -- dev <dev@dev-All-Series>  Mon, 01 Apr 2019 21:28:43 -0400
+
+i2p (0.9.27-1~deb8u+1) stable; urgency=medium
+>>>>>>> 46a757551d047ed0492c0e93ffd1410dd95168b8
 
   * Unofficial Debian package built using "ant debian"
 

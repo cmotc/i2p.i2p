@@ -40,6 +40,7 @@ cache:
 
 script:
   - |
+    ant build
     if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then
       ./gradlew check codeCoverageReport
       ## Sonarcloud temporarily disabled
@@ -51,9 +52,9 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
-notifications:
-  irc:
-    channels:
-      - "chat.freenode.net#i2p-dev"
-    on_success: change
-    on_failure: always
+#notifications:
+#  irc:
+#    channels:
+#      - "chat.freenode.net#i2p-dev"
+#    on_success: change
+#    on_failure: always
