@@ -41,8 +41,9 @@ public class TunnelControllerGroup implements ClientApp {
     private final I2PAppContext _context;
     private final ClientAppManager _mgr;
     private static volatile TunnelControllerGroup _instance;
-    static final String DEFAULT_CONFIG_FILE = "i2ptunnel.config";
-    static final String DEFAULT_CONFIG_DIRECTORY = "i2ptunnel.config.d";
+    private static final String DEFAULT_CONFIG_FILE = "i2ptunnel.config";
+    private static final String DEFAULT_CONFIG_DIRECTORY = "i2ptunnel.config.d";
+    private static final String CONFIG_PREFIX = "tunnel.";
 
     private final List<TunnelController> _controllers;
     private final ReadWriteLock _controllersLock;
@@ -521,7 +522,8 @@ public class TunnelControllerGroup implements ClientApp {
     public synchronized void saveConfig(String configFile) throws IOException {
         File cfgFile = new File(configFile);
         if (!cfgFile.isAbsolute())
-            cfgFile = new File(I2PAppContext.getGlobalContext().getConfigDir(), configFile);
+//            cfgFile = new File(I2PAppContext.getGlobalContext().getConfigDir(), configFile);
+            cfgFile = new File(_context.getConfigDir(), configFile);
         File parent = cfgFile.getParentFile();
         if ( (parent != null) && (!parent.exists()) )
             parent.mkdirs();
@@ -531,7 +533,8 @@ public class TunnelControllerGroup implements ClientApp {
         try {
             for (int i = 0; i < _controllers.size(); i++) {
                 TunnelController controller = _controllers.get(i);
-                Properties cur = controller.getConfig("tunnel." + i + ".");
+                //Properties cur = controller.getConfig("tunnel." + i + ".");
+                Properties cur = controller.getConfig(CONFIG_PREFIX + i + ".");
                 map.putAll(cur);
             }
         } finally {
