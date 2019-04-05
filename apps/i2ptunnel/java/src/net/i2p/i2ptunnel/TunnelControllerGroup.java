@@ -522,7 +522,6 @@ public class TunnelControllerGroup implements ClientApp {
     public synchronized void saveConfig(String configFile) throws IOException {
         File cfgFile = new File(configFile);
         if (!cfgFile.isAbsolute())
-//            cfgFile = new File(I2PAppContext.getGlobalContext().getConfigDir(), configFile);
             cfgFile = new File(_context.getConfigDir(), configFile);
         File parent = cfgFile.getParentFile();
         if ( (parent != null) && (!parent.exists()) )
@@ -533,7 +532,6 @@ public class TunnelControllerGroup implements ClientApp {
         try {
             for (int i = 0; i < _controllers.size(); i++) {
                 TunnelController controller = _controllers.get(i);
-                //Properties cur = controller.getConfig("tunnel." + i + ".");
                 Properties cur = controller.getConfig(CONFIG_PREFIX + i + ".");
                 map.putAll(cur);
             }

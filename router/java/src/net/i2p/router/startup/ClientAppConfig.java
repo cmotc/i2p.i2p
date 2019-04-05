@@ -68,9 +68,10 @@ public class ClientAppConfig {
     private final static long DEFAULT_STARTUP_DELAY = 2*60*1000;
     /** speed up i2ptunnel without rewriting clients.config */
     private final static long I2PTUNNEL_STARTUP_DELAY = -1000;
-    
+
     private static final String PROP_CLIENT_CONFIG_FILENAME = "router.clientConfigFile";
     private static final String DEFAULT_CLIENT_CONFIG_FILENAME = "clients.config";
+    private static final String DEFAULT_CLIENT_CONFIG_DIRECTORY = "clients.config.d";
     private static final String PREFIX = "clientApp.";
 
     // let's keep this really simple
@@ -86,6 +87,7 @@ public class ClientAppConfig {
     public final String stopargs;
     /** @since 0.7.12 */
     public final String uninstallargs;
+    private File configFile;
 
     public ClientAppConfig(String cl, String client, String a, long d, boolean dis) {
         this(cl, client, a, d, dis, null, null, null);
@@ -114,23 +116,23 @@ public class ClientAppConfig {
     private static Properties getClientAppProps(RouterContext ctx) {
         Properties rv = new Properties();
         File cfgFile = configFile(ctx);
-        
+
         // fall back to use router.config's clientApp.* lines
         if (!cfgFile.exists()) {
             System.out.println("Warning - No client config file " + cfgFile.getAbsolutePath());
             rv.putAll(ctx.router().getConfigMap());
             return rv;
         }
-        
+
         try {
             DataHelper.loadProps(rv, cfgFile);
         } catch (IOException ioe) {
             System.out.println("Error loading the client app properties from " + cfgFile.getAbsolutePath() + ' ' + ioe);
         }
-        
+
         return rv;
     }
-    
+
     /*
      * Go through the properties, and return a List of ClientAppConfig structures
      * This is for the router.
@@ -168,7 +170,7 @@ public class ClientAppConfig {
         int i = 0;
         while (true) {
             String className = clientApps.getProperty(PREFIX + i + ".main");
-            if (className == null) 
+            if (className == null)
                 break;
             String clientName = clientApps.getProperty(PREFIX + i + ".name");
             String args = clientApps.getProperty(PREFIX + i + ".args");
